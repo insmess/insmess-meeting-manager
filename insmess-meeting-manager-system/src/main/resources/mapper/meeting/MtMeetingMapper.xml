@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.meeting.mapper.MtMeetingMapper">
+    
+    <resultMap type="MtMeeting" id="MtMeetingResult">
+        <result property="id"    column="id"    />
+        <result property="imMeetingId"    column="im_meeting_id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectMtMeetingVo">
+        select id, im_meeting_id, name from mt_meeting
+    </sql>
+
+    <select id="selectMtMeetingList" parameterType="MtMeeting" resultMap="MtMeetingResult">
+        <include refid="selectMtMeetingVo"/>
+        <where>  
+            <if test="imMeetingId != null  and imMeetingId != ''"> and im_meeting_id = #{imMeetingId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectMtMeetingById" parameterType="Long" resultMap="MtMeetingResult">
+        <include refid="selectMtMeetingVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMtMeeting" parameterType="MtMeeting">
+        insert into mt_meeting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="imMeetingId != null">im_meeting_id,</if>
+            <if test="name != null">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="imMeetingId != null">#{imMeetingId},</if>
+            <if test="name != null">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMtMeeting" parameterType="MtMeeting">
+        update mt_meeting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="imMeetingId != null">im_meeting_id = #{imMeetingId},</if>
+            <if test="name != null">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMtMeetingById" parameterType="Long">
+        delete from mt_meeting where id = #{id}
+    </delete>
+
+    <delete id="deleteMtMeetingByIds" parameterType="String">
+        delete from mt_meeting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
