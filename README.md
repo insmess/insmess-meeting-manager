@@ -47,7 +47,7 @@
 
 2. 获取`insmess_meeting_x86.tar.gz`安装程序
 - 百度网盘： https://pan.baidu.com/s/1zdn-UxOa2L78Qd005kIDAg?pwd=x1ft 提取码: x1ft
-- 夸克网盘：
+- 夸克网盘： https://pan.quark.cn/s/b35250dba400 提取码：KLx3
 
 3. 执行以下命令进行快速安装
 
@@ -155,3 +155,5 @@
 
 参考insmess-meeting-manager会议管理系统（若依）的交互代码
 
+二次开发SDK代码地址：
+https://gitee.com/insmess_enterprise/insmess-meeting-sdk.git
